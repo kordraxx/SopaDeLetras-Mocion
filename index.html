@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>Sopa de letras</title>
+
+<!--Estilos-->
+
+<link rel="stylesheet" type="text/css" href="style.css"  media="all">
+<link rel="stylesheet" href="bootstrap.min.css" >
+<link rel="stylesheet" type="text/css" href="jquery-ui.css">
+<link href="jquery.tagit.css" rel="stylesheet" type="text/css">
+
+<!--Scripts necesarios-->
+
+<script type="text/javascript" src="jquery.min.js"></script> 
+<script type="text/javascript" src="wordfind.js"></script> 
+<script type="text/javascript" src="wordfindgame.js"></script> 
+<script type="text/javascript" src="bootstrap.min.js" ></script>
+<script type="text/javascript" src="jquery-ui.min.js"  ></script>
+<script type="text/javascript" src="tag-it.js"></script>
+
+<div class="container">
+    <div class="row">
+        
+        <script type="text/javascript">
+            var mytag;
+            $(document).ready(function () {
+                mytag = $("#myTags").tagit({});
+				Crear();
+            });
+</script>
+<div class="row  ocultar text-center">
+    <br />
+    <div class="panel panel-default">
+    <div class="panel-heading"><h1>Prueba de desarrollo Frontend - <strong>Sopa de letras</strong></h1></div>
+    <div class="panel-heading"><h4><strong>Agrega</strong> o <strong>Elimina</strong> tantas palabras como quieras para realizar la sopa de letras</strong></h4></div>
+    <div class="panel-body"><ul id="myTags">
+    <li>Desarrollo</li>
+    <li>Frontend</li>
+    <li>Prueba</li>
+    <li>Sopa</li>
+    <li>Letras</li>
+</ul></div>
+  </div></div>
+
+<div class="row">
+
+    <div class="row text-center">
+    <div class="panel panel-default">
+    <div class="panel-body">
+    <div class="ocultar">
+    <button onclick="Crear();" class="btn btn-success btn-lg"> Generar Juego</button>
+    <button id='solve' class="btn btn-danger btn-lg" > Resolver Juego</button>
+    </div>
+
+      <!--Resultado de la sopa de letras con palabras-->
+
+      <div class="row">
+
+      
+      <div class="col-md-3">
+
+                      <div id='Palabras'></div>
+      </div>
+              <div class="col-md-9">
+                      <div id='juego'></div>
+              </div>
+       </div>
+    </div>
+
+  </div>
+
+</div>
+
+    <script>
+
+    /*Definición de variables*/  
+    var words = [];
+    var gamePuzzle;
+
+	function Crear() {
+      /*Agarra las palabras de la lista*/
+
+	    datos = mytag[0].textContent.trim().split("×");
+        
+      /*Los mete en el arreglo*/
+	    for (i = 0; i < (datos.length)-1; i++) {
+	       words.push(datos[i]);
+
+      /*Función crear juego*/
+
+	    }
+	    $('#Juegos').show();
+	    gamePuzzle = wordfindgame.create(datos, '#juego', '#Palabras');
+	    var puzzle = wordfind.newPuzzle(datos, { height: 18, width: 18, fillBlanks: false });
+        wordfind.print(puzzle);   
+      }
+
+      /*Función de Resolver*/
+
+		$('#solve').click( function() {wordfindgame.solve(gamePuzzle, words);});
+    </script>
+    </div>
+    <div class="row text-right"><h5>Camilo Andrés Pardo Castelblanco - Aspirante a practicante desarrollador FrontEnd - Para MocionSoft</strong></h5></div>
+</body>
+</html>
